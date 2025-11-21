@@ -1,14 +1,13 @@
-import { View, Text, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput} from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet } from "react-native";
 import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import AntDesign from '@expo/vector-icons/AntDesign';
+import BtnSec from "../components/BtnSec";
 
 export default () =>{
 
-    const navigation = useNavigation();
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
 
@@ -49,16 +48,7 @@ export default () =>{
                         />
 
                     </View>
-                    <TouchableOpacity style={styles.button}
-                    onPress={() => navigation.navigate('Home')} 
-                    >
-                        <LinearGradient 
-                            colors={['rgba(219, 39, 39, 1)', 'rgba(169, 37, 32, 1)']}        
-                        />
-                    <Text style={styles.buttonText} >ENTRAR</Text>
-                            
-                   
-                    </TouchableOpacity>
+                    <BtnSec text="ENTRAR" onpress="Home"  />
                 </View>
             </View>
         </SafeAreaView>
@@ -137,27 +127,4 @@ const styles = StyleSheet.create({
         padding: 10,
         marginTop: 5,
     },
-    button:{
-        width: 200,
-        alignSelf: 'center',
-        backgroundColor: '#c02623',
-        padding: 15,
-        borderRadius: 5,
-        marginTop: 20,
-        alignItems: 'center',
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-    buttonText:{
-        color: 'white',
-        fontFamily: 'Lexend',
-        fontWeight: '700',
-        fontSize: 16,
-    }
 });
