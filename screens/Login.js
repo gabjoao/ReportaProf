@@ -17,7 +17,7 @@ export default () =>{
             <View style={styles.container} >
                   <LinearGradient 
                             colors={['rgba(219, 39, 39, 1)', 'rgba(169, 37, 32, 1)']}
-                            style={styles.fundo}
+                            style={styles.background}
                 />
 
                 <View  style={styles.itens}>
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         display: 'flex',
         alignItems: 'center',
     },
-    fundo: {
+    background: {
         position: 'absolute',
         width: 630,
         height: 370,

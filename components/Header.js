@@ -12,7 +12,7 @@ export default function Header() {
             colors={['rgba(219, 39, 39, 1)', 'rgba(169, 37, 32, 1)']}
             style={{ position: 'absolute', left: 0, right: 0, top: 0, height: 100 }}
         />
-
+  
       <View style={styles.content}>
         <Text style={styles.title}>ReportaProf</Text>
       </View>
