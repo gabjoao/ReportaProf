@@ -5,8 +5,11 @@ import { StyleSheet } from "react-native";
 import { useState } from "react";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import BtnSec from "../components/BtnSec";
+import { useNavigation } from '@react-navigation/native';
 
 export default () =>{
+
+    const navigation = useNavigation();
 
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
@@ -48,7 +51,7 @@ export default () =>{
                         />
 
                     </View>
-                    <BtnSec text="ENTRAR" onpress="Home"  />
+                    <BtnSec text="ENTRAR" onPress={ () => navigation.navigate('Home')}   />
                 </View>
             </View>
         </SafeAreaView>
