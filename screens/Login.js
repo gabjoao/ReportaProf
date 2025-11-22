@@ -1,7 +1,7 @@
 import { View, Text, TextInput} from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Alert } from "react-native";
 import { useState } from "react";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import BtnSec from "../components/BtnSec";
@@ -14,12 +14,23 @@ export default () =>{
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
 
+    const handleLogin = () => {
+        if (cpf.trim() === '' || senha.trim() === '') {
+            Alert.alert('Atenção', 'Por favor, preencha o CPF e a senha.');
+            return;
+        }
+
+        // lógica de validação do login....
+
+        navigation.navigate('Home');
+  }
+
     return (
         <SafeAreaView>
             <View style={styles.container} >
-                  <LinearGradient 
-                            colors={['rgba(219, 39, 39, 1)', 'rgba(169, 37, 32, 1)']}
-                            style={styles.background}
+                <LinearGradient 
+                    colors={['rgba(219, 39, 39, 1)', 'rgba(169, 37, 32, 1)']}
+                    style={styles.background}
                 />
 
                 <View  style={styles.itens}>
@@ -51,7 +62,7 @@ export default () =>{
                         />
 
                     </View>
-                    <BtnSec text="ENTRAR" onPress={ () => navigation.navigate('Home')}   />
+                    <BtnSec text="ENTRAR" onPress={handleLogin}   />
                 </View>
             </View>
         </SafeAreaView>
