@@ -20,63 +20,63 @@ const ICON_CONFIG = {
     }
 };
 
-export default ({tipo, label, options, onSelect, selectedValue, multiple, disable, extraOptions, onSelectExtra, selectedExtraValue, extraTitle}) => {
+export default ({ tipo, label, options, onSelect, selectedValue, multiple, disable, extraOptions, onSelectExtra, selectedExtraValue, extraTitle }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
     const iconData = ICON_CONFIG[tipo];
 
     if (!iconData) {
         console.log(`Tipo de ícone "${tipo}" não configurado.`);
-        return null; 
+        return null;
     }
 
 
-const getDisplayText = () => {
-    if (!selectedValue) return label;
-    if (Array.isArray(selectedValue)) {
-        if (selectedValue.length === 0) return label;
-        return selectedValue.length > 1 
-          ? `${selectedValue.length} selecionados` 
-          : selectedValue[0];
+    const getDisplayText = () => {
+        if (!selectedValue) return label;
+        if (Array.isArray(selectedValue)) {
+            if (selectedValue.length === 0) return label;
+            return selectedValue.length > 1
+                ? `${selectedValue.length} selecionados`
+                : selectedValue[0].nome || selectedValue[0]?.name || String(selectedValue[0]);;
         }
-    return selectedValue;
+        return selectedValue?.nome || selectedValue?.name || String(selectedValue) || label;
     };
 
     return (
-    <>
-        <TouchableOpacity style={[styles.input, disable && {opacity: 0.5, backgroundColor: '#f0f0f0'}]} 
-        onPress={ () =>{
-            if(!disable) setModalVisible(true);
-            }
-            }
-            activeOpacity={disable ? 1 : 0.7} >
+        <>
+            <TouchableOpacity style={[styles.input, disable && { opacity: 0.5, backgroundColor: '#f0f0f0' }]}
+                onPress={() => {
+                    if (!disable) setModalVisible(true);
+                }
+                }
+                activeOpacity={disable ? 1 : 0.7} >
 
-            <View style={styles.itens} >
-                <GradnentIcon family={iconData.family} name={iconData.name} size={20} colors={['#010201', '#5ee24f']}  />
-                <Text style={styles.label} numberOfLines={1} >{getDisplayText()}</Text>
-            </View>
-            
-            <Entypo name="magnifying-glass" size={20} color="#4a4a4a"/>
-        </TouchableOpacity>
+                <View style={styles.itens} >
+                    <GradnentIcon family={iconData.family} name={iconData.name} size={20} colors={['#010201', '#5ee24f']} />
+                    <Text style={styles.label} numberOfLines={1} >{getDisplayText()}</Text>
+                </View>
+
+                <Entypo name="magnifying-glass" size={20} color="#4a4a4a" />
+            </TouchableOpacity>
 
 
-        <SelectionModal
-            visible={modalVisible}
-            onClose={() => setModalVisible(false)}
-            title={`Selecione: ${label}`}
-            options={options}
-            onSelect={onSelect}
-            selectedValue={selectedValue} // Note que aqui passo o valor cru, o Modal trata array/single
-            selectedValues={selectedValue} // Mantendo compatibilidade
-            multiple={multiple}
+            <SelectionModal
+                visible={modalVisible}
+                onClose={() => setModalVisible(false)}
+                title={`Selecione: ${label}`}
+                options={options}
+                onSelect={onSelect}
+                selectedValue={selectedValue} // valor cru, o Modal trata array/single
+                selectedValues={selectedValue} // mantendo compatibilidade
+                multiple={multiple}
 
-            // lógica da sala especial
-            extraOptions={extraOptions}
-            extraTitle={extraTitle}
-            onSelectExtra={onSelectExtra}
-            selectedExtraValue={selectedExtraValue}
-      />
-    </>
+                // lógica da sala especial
+                extraOptions={extraOptions}
+                extraTitle={extraTitle}
+                onSelectExtra={onSelectExtra}
+                selectedExtraValue={selectedExtraValue}
+            />
+        </>
     );
 }
 
@@ -95,12 +95,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         backgroundColor: 'white',
     },
-    itens:{
+    itens: {
         flexDirection: 'row',
         alignItems: 'center',
         gap: 10,
     },
-    label:{
+    label: {
         fontFamily: 'Lexend',
         fontSize: 14,
         color: 'black',
