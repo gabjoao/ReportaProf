@@ -1,5 +1,5 @@
 // src/api.js
-const BASE_URL = "https://marti-dittographic-undistractingly.ngrok-free.dev/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
+const BASE_URL = "http://10.0.2.2:8000/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
 
 async function fetchJson(url, options = {}) {
     const res = await fetch(`${BASE_URL}${url}`, {
@@ -43,6 +43,10 @@ export const createOcorrencia = async (payload) => {
         method: "POST",
         body: JSON.stringify(payload)
     });
+}
+
+export const getOcorrenciasProfessor = async (id) =>{
+    return fetchJson(`/ocorrencias/${id}/professor`);
 }
 
 /*
