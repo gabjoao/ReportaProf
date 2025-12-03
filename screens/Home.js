@@ -32,7 +32,6 @@ export default () => {
         }
 
     }
-
     const load = async () => {
         try {
             const resTurmas = await api.getTurmas();

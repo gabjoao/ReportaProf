@@ -1,4 +1,4 @@
-import { View, Text, TextInput} from "react-native";
+import { View, Text, TextInput } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, Alert } from "react-native";
@@ -6,45 +6,79 @@ import { useState } from "react";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import BtnSec from "../components/BtnSec";
 import { useNavigation } from '@react-navigation/native';
+import * as api from '../utils/api'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default () =>{
+export var KEY;
+
+export default () => {
 
     const navigation = useNavigation();
 
     const [cpf, setCpf] = useState('');
     const [senha, setSenha] = useState('');
 
-    const handleLogin = () => {
+    const storeData = async (key, value) => {
+        try {
+            await AsyncStorage.setItem(key, value);
+        }     catch (e) {
+        // saving error
+            console.error("Error saving data:", e);
+        }
+    }
+
+    const handleLogin = async () => {
         if (cpf.trim() === '' || senha.trim() === '') {
             Alert.alert('Atenção', 'Por favor, preencha o CPF e a senha.');
             return;
         }
 
-        // lógica de validação do login....
+        const loginJson = { "username": cpf, "password": senha }
+       
+        KEY = await login(loginJson);
 
-        navigation.navigate('Home');
-  }
+        if(KEY){
+            await storeData('KEY', KEY);
+            navigation.navigate("Home");
+        }
+        else Alert.alert('Atenção', 'Credenciais inválidas!');
+
+    };
+        
+    const login = async (loginJson) => {
+        try {
+            const res = await api.fazerLogin(loginJson);
+            const key = res.body;
+            //console.log(key.access)
+            return key.access;
+
+        } catch (error) {
+            console.error('Erro ao carregar dados:', error);
+            return null;
+        }
+        
+    }
 
     return (
         <SafeAreaView>
             <View style={styles.container} >
-                <LinearGradient 
+                <LinearGradient
                     colors={['rgba(219, 39, 39, 1)', 'rgba(169, 37, 32, 1)']}
                     style={styles.background}
                 />
 
-                <View  style={styles.itens}>
+                <View style={styles.itens}>
                     <AntDesign name="alert" size={40} color="white" />
                     <Text style={styles.h1} >ReportaProf</Text>
                 </View>
-               
 
-                <View style ={styles.content} >
+
+                <View style={styles.content} >
                     <Text style={styles.h2} >Login</Text>
 
                     <View style={styles.inputArea} >
                         <Text style={styles.inputLabel} >CPF</Text>
-                        <TextInput 
+                        <TextInput
                             style={styles.input}
                             value={cpf}
                             onChangeText={setCpf}
@@ -53,16 +87,16 @@ export default () =>{
                         />
 
                         <Text style={styles.inputLabel} >Senha</Text>
-                        <TextInput 
+                        <TextInput
                             style={styles.input}
                             value={senha}
                             onChangeText={setSenha}
                             secureTextEntry={true}
-                            placeholder="********"  
+                            placeholder="********"
                         />
 
                     </View>
-                    <BtnSec text="ENTRAR" onPress={handleLogin}   />
+                    <BtnSec text="ENTRAR" onPress={handleLogin} />
                 </View>
             </View>
         </SafeAreaView>
@@ -76,7 +110,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-    itens:{
+    itens: {
         marginTop: 60,
         display: 'flex',
         alignItems: 'center',
@@ -87,7 +121,7 @@ const styles = StyleSheet.create({
         height: 570,
         top: -100.27,
         left: -50.96,
-        transform: [{ rotate: '30deg'}],
+        transform: [{ rotate: '30deg' }],
         backgroundColor: 'red',
     },
 
@@ -97,7 +131,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: '400',
     },
-    content:{
+    content: {
         position: 'absolute',
         top: 150,
         display: 'flex',
@@ -117,24 +151,24 @@ const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
     },
-    h2:{
+    h2: {
         fontSize: 24,
         fontFamily: 'Lexend',
         color: '#c02623',
         fontWeight: '700',
         textAlign: 'center',
     },
-    inputArea:{
+    inputArea: {
         display: 'flex',
     },
-    inputLabel:{
+    inputLabel: {
         fontSize: 16,
         fontFamily: 'Lexend',
         color: 'black',
         fontWeight: '800',
         marginTop: 10,
     },
-    input:{
+    input: {
         borderWidth: 1,
         borderColor: '#878787',
         borderRadius: 5,
@@ -142,3 +176,4 @@ const styles = StyleSheet.create({
         marginTop: 5,
     },
 });
+

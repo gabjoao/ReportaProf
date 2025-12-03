@@ -1,9 +1,29 @@
 // src/api.js
-const BASE_URL = "http://10.0.2.2:8000/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
+const BASE_URL = "http://marti-dittographic-undistractingly.ngrok-free.dev/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const retrieveData = async (key) => {
+      try {
+        const value = await AsyncStorage.getItem(key);
+        if (value !== null) {
+          // value previously stored
+          return value;
+        }
+      } catch (e) {
+        // error reading value
+        console.error("Error retrieving data:", e);
+      }
+      return null;
+};
+
 
 async function fetchJson(url, options = {}) {
     const res = await fetch(`${BASE_URL}${url}`, {
-        headers: { "Content-Type": "application/json" },
+        headers: { 
+            "Authorization": `Bearer ${await retrieveData("KEY")}`,
+            "Content-Type": "application/json",
+                    
+         },
         ...options
     });
     const text = await res.text();
@@ -14,8 +34,11 @@ async function fetchJson(url, options = {}) {
     }
 }
 
+
+
 export const getTurmas = async () =>{
-    return fetchJson("/turmas/");
+    console.log(await retrieveData("KEY"));
+    return fetchJson("/minhas-turmas/");
 }
 
 export const getEstudantes = async (id) => {
@@ -47,6 +70,14 @@ export const createOcorrencia = async (payload) => {
 
 export const getOcorrenciasProfessor = async (id) =>{
     return fetchJson(`/ocorrencias/${id}/professor`);
+}
+
+export const fazerLogin = async (payload) =>{
+    return fetchJson("/auth/token/", {
+        method: "POST",
+        body: JSON.stringify(payload)
+    })
+
 }
 
 /*
