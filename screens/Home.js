@@ -23,6 +23,8 @@ export default () => {
     const [estudantes, setEstudantes] = useState([]);
     const [situacoes, setSituacoes] = useState([]);
 
+    let turmasNomes = null;
+
     const registrarOcorrencia = async (ocorrencia) =>{
         console.log(ocorrencia);
         try {
@@ -47,6 +49,9 @@ export default () => {
             console.error('Erro ao carregar dados:', error);
         }
     }
+
+    turmasNomes = turmas.map(t => t.turma);
+
 
     const carregarEstudantes = async (turmaSelecionada) => {
         if (turmaSelecionada && turmaSelecionada.id) {
@@ -114,7 +119,7 @@ export default () => {
                         <BtnOcorrencia
                             tipo={'turma'}
                             label={'Turma'}
-                            options={turmas}
+                            options={turmasNomes}
                             selectedValue={turma}
                             onSelect={(novaTurma) => {
                                 console.log("Turma selecionada no onSelect:", novaTurma);
@@ -173,7 +178,7 @@ export default () => {
                             else salaEnviar = sala.id;
                             
                             console.log(salaEnviar);
-                            const minhaOcorrencia = new OcorrenciaClasse(observacao, 1, turma.id, estudantesId, situacoesId, salaEnviar);
+                            const minhaOcorrencia = new OcorrenciaClasse(observacao, turmas[0].professor.id, turma.id, estudantesId, situacoesId, salaEnviar);
                             registrarOcorrencia(minhaOcorrencia); 
                         }} />
                         <BtnSec text="CANCELAR" onPress={() => {

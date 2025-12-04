@@ -1,5 +1,5 @@
 // src/api.js
-const BASE_URL = "http://marti-dittographic-undistractingly.ngrok-free.dev/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
+const BASE_URL = "https://marti-dittographic-undistractingly.ngrok-free.dev/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const retrieveData = async (key) => {
@@ -18,12 +18,26 @@ const retrieveData = async (key) => {
 
 
 async function fetchJson(url, options = {}) {
+    const accessToken = await retrieveData("KEY");
+
+    const defaultHeader = {
+        "Content-Type": "application/json"
+    }
+
+    if(accessToken){
+        defaultHeader["Authorization"] = `Bearer ${accessToken}`;
+    }
+
+    const finalHeaders = {
+        ...defaultHeader,
+        ...(options.headers || {})
+    }
+
+   // console.log(`[API] Requisitando ${url}`);
+    //console.log(`[API] Token usado: ${accessToken}`);
+
     const res = await fetch(`${BASE_URL}${url}`, {
-        headers: { 
-            "Authorization": `Bearer ${await retrieveData("KEY")}`,
-            "Content-Type": "application/json",
-                    
-         },
+        headers: finalHeaders,
         ...options
     });
     const text = await res.text();
@@ -37,8 +51,12 @@ async function fetchJson(url, options = {}) {
 
 
 export const getTurmas = async () =>{
-    console.log(await retrieveData("KEY"));
-    return fetchJson("/minhas-turmas/");
+    //console.log(await retrieveData("KEY"));
+    return fetchJson("minhas-turmas/");
+}
+
+export const getMinhasOcorrencias = async () => {
+    return fetchJson("minhas-ocorrencias/");
 }
 
 export const getEstudantes = async (id) => {
@@ -80,16 +98,3 @@ export const fazerLogin = async (payload) =>{
 
 }
 
-/*
-export const updateAluno = async (id, payload) => {
-    return fetchJson(`/alunos/${id}`, {
-        method: "PUT",
-        body: JSON.stringify(payload)
-    });
-}
-
-export const deleteAluno = async (id) => {
-    return fetchJson(`/alunos/${id}`, { method: "DELETE" });
-    
-}
-*/

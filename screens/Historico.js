@@ -12,9 +12,9 @@ export default () =>{
 
     const load = async () => {
         try {
-            // o id 1 passado por parâmetro é utilizado para testes, futuramente será o id do professor logado no sistema
-            const resOcorrencias = await api.getOcorrenciasProfessor(1);
+            const resOcorrencias = await api.getMinhasOcorrencias();
             setOcorrencias(resOcorrencias.body);
+
         
         } catch (error) {
             console.error('Erro ao carregar dados:', error);

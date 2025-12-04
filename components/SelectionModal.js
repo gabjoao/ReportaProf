@@ -85,9 +85,9 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
     const getItemText = (item) => {
         if (!item) return 'Item inválido';
 
-
         if (typeof item === 'string') return item;
         if (item.nome) return item.nome;
+        if (item.nome) return item.turma.nome;
         if (item.name) return item.name;
         if (item.home) return item.home;
 
