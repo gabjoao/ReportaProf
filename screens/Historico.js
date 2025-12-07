@@ -127,9 +127,8 @@ const styles = StyleSheet.create({
         padding: 10,
         display: 'flex',
         gap: 5,
-        width: '100%',
+        width: 300,
         marginTop: 10,
-        width: 320
     },
     itemH1: {
         textAlign: 'center',

@@ -5,6 +5,7 @@ import { StatusBar } from 'react-native';
 import Login from './screens/Login';
 import Home from './screens/Home';
 import Historico from './screens/Historico';
+import NovaOcorrencia from './screens/NovaOcorrencia';
 
 export default function App() {
   return (
@@ -32,6 +33,10 @@ const RootStack = createNativeStackNavigator({
     },
     Historico: {
       screen: Historico,
+      options: {headerShown: false, animation: 'fade'},
+    },
+    NovaOcorrencia: {
+      screen: NovaOcorrencia,
       options: {headerShown: false, animation: 'fade'},
     },
   }

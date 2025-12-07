@@ -7,10 +7,13 @@ import { useState, useEffect } from "react";
 import BtnSec from "../components/BtnSec";
 import BtnPrim from "../components/btnPrim";
 import * as api from '../utils/api'
+import { useNavigation } from '@react-navigation/native';
 const OcorrenciaClasse = require('../models/Ocorrencia');
 
 
 export default () => {
+
+    const navigation = useNavigation();
 
     const [turma, setTurma] = useState(null);
     const [sala, setSala] = useState(null);
@@ -23,12 +26,14 @@ export default () => {
     const [estudantes, setEstudantes] = useState([]);
     const [situacoes, setSituacoes] = useState([]);
 
-    let turmasNomes = null;
-
     const registrarOcorrencia = async (ocorrencia) =>{
         console.log(ocorrencia);
         try {
-            api.createOcorrencia(ocorrencia);
+            const res = await api.createOcorrencia(ocorrencia);
+
+            if(res.ok) navigation.navigate('NovaOcorrencia');
+            else alert('Erro ao registrar ocorrência' + (JSON.stringify(res.body) || ''));
+            
         } catch (error) {
             console.log(error);
         }
