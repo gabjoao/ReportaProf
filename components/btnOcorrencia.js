@@ -30,16 +30,41 @@ export default ({ tipo, label, options, onSelect, selectedValue, multiple, disab
         return null;
     }
 
+    const formatItem = (item) => {
+        if (!item) return "";
+
+        // 1. Caso Especial: TURMA (Objeto Complexo da API)
+        if (item.turma && item.disciplina) {
+            return `${item.turma.nome} - ${item.disciplina.nome}`;
+        }
+
+        // 2. Casos Padrões (Estudante, Situação, etc)
+        if (item.nome) return item.nome;
+        if (item.name) return item.name;
+        
+        // 3. Último recurso (evita o [object Object])
+        return String(item);
+    };
 
     const getDisplayText = () => {
+        // Se não tem nada selecionado, mostra o Label (ex: "Turma")
         if (!selectedValue) return label;
+
+        // SE FOR ARRAY (Múltipla escolha)
         if (Array.isArray(selectedValue)) {
             if (selectedValue.length === 0) return label;
-            return selectedValue.length > 1
-                ? `${selectedValue.length} selecionados`
-                : selectedValue[0].nome || selectedValue[0]?.name || String(selectedValue[0]);;
+            
+            // Se tiver mais de 1, mostra a contagem
+            if (selectedValue.length > 1) {
+                return `${selectedValue.length} selecionados`;
+            }
+
+            // Se tiver apenas 1 item no array, formata ele bonitinho
+            return formatItem(selectedValue[0]);
         }
-        return selectedValue?.nome || selectedValue?.name || String(selectedValue) || label;
+
+        // SE FOR ÚNICO (Escolha simples)
+        return formatItem(selectedValue);
     };
 
     return (

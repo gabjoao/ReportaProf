@@ -1,5 +1,6 @@
-// src/api.js
-const BASE_URL = "https://marti-dittographic-undistractingly.ngrok-free.dev/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
+const BASE_URL = "http://192.168.3.20:8000/"; 
+//const BASE_URL = "http://127.0.0.1:8000/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
+//https://marti-dittographic-undistractingly.ngrok-free.dev/
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const retrieveData = async (key) => {
@@ -33,8 +34,8 @@ async function fetchJson(url, options = {}) {
         ...(options.headers || {})
     }
 
-   // console.log(`[API] Requisitando ${url}`);
-    //console.log(`[API] Token usado: ${accessToken}`);
+    console.log(`[API] Requisitando ${url}`);
+    console.log(`[API] Token usado: ${accessToken}`);
 
     const res = await fetch(`${BASE_URL}${url}`, {
         headers: finalHeaders,

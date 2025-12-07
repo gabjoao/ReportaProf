@@ -85,14 +85,23 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
     const getItemText = (item) => {
         if (!item) return 'Item inválido';
 
+        // no caso qie seja apenas uma string (ex: lista de salas simples)
         if (typeof item === 'string') return item;
-        if (item.nome) return item.nome;
-        if (item.nome) return item.turma.nome;
-        if (item.name) return item.name;
-        if (item.home) return item.home;
 
-        return JSON.stringify(item).substring(0, 50) + '...';
+        // verifica se é o objeto complexo de Turma + Disciplina 
+        if (item.turma && item.disciplina) {
+            // retorna: "sala - discplina"
+            return `${item.turma.nome} - ${item.disciplina.nome}`;
+        }
+
+        // fallbacks para outros tipos de lista (Estudantes, Situações)
+        if (item.nome) return item.nome;
+        if (item.name) return item.name;
+        
+        // fallback final para segurança
+        return 'Item sem nome';
     };
+    
     const isItemSelected = (item) => {
         if (isShowingExtra) {
             return localExtraSelected === item || localExtraSelected?.id === item?.id;

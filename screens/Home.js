@@ -50,7 +50,6 @@ export default () => {
         }
     }
 
-    turmasNomes = turmas.map(t => t.turma);
 
 
     const carregarEstudantes = async (turmaSelecionada) => {
@@ -119,7 +118,7 @@ export default () => {
                         <BtnOcorrencia
                             tipo={'turma'}
                             label={'Turma'}
-                            options={turmasNomes}
+                            options={turmas}
                             selectedValue={turma}
                             onSelect={(novaTurma) => {
                                 console.log("Turma selecionada no onSelect:", novaTurma);

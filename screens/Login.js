@@ -15,7 +15,7 @@ export default () => {
 
     const navigation = useNavigation();
 
-    const [cpf, setCpf] = useState('');
+    const [user, setUser] = useState('');
     const [senha, setSenha] = useState('');
 
     const storeData = async (key, value) => {
@@ -28,12 +28,12 @@ export default () => {
     }
 
     const handleLogin = async () => {
-        if (cpf.trim() === '' || senha.trim() === '') {
-            Alert.alert('Atenção', 'Por favor, preencha o CPF e a senha.');
+        if (user.trim() === '' || senha.trim() === '') {
+            Alert.alert('Atenção', 'Por favor, preencha o usuário e a senha.');
             return;
         }
 
-        const loginJson = { "username": cpf, "password": senha }
+        const loginJson = { "username": user, "password": senha }
        
         KEY = await login(loginJson);
 
@@ -77,13 +77,12 @@ export default () => {
                     <Text style={styles.h2} >Login</Text>
 
                     <View style={styles.inputArea} >
-                        <Text style={styles.inputLabel} >CPF</Text>
+                        <Text style={styles.inputLabel} >Usuário</Text>
                         <TextInput
                             style={styles.input}
-                            value={cpf}
-                            onChangeText={setCpf}
-                            keyboardType="numeric"
-                            placeholder="000.000.000-00"
+                            value={user}
+                            onChangeText={setUser}
+                            placeholder="Usuario"
                         />
 
                         <Text style={styles.inputLabel} >Senha</Text>
