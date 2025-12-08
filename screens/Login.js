@@ -1,15 +1,18 @@
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Dimensions, TouchableOpacity } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, Alert } from "react-native";
 import { useState } from "react";
 import AntDesign from '@expo/vector-icons/AntDesign';
+import { Ionicons } from '@expo/vector-icons';
 import BtnSec from "../components/BtnSec";
 import { useNavigation } from '@react-navigation/native';
 import * as api from '../utils/api'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export var KEY;
+const { width, height } = Dimensions.get('window');
+
+let KEY;
 
 export default () => {
 
@@ -17,6 +20,7 @@ export default () => {
 
     const [user, setUser] = useState('');
     const [senha, setSenha] = useState('');
+    const [hidePass, setHidePass] = useState(true);
 
     const storeData = async (key, value) => {
         try {
@@ -86,15 +90,29 @@ export default () => {
                         />
 
                         <Text style={styles.inputLabel} >Senha</Text>
+                        <View style={styles.passwordContainer}>
                         <TextInput
-                            style={styles.input}
+                            style={styles.inputInside}
                             value={senha}
                             onChangeText={setSenha}
-                            secureTextEntry={true}
                             placeholder="********"
+        
+                            secureTextEntry={hidePass} 
                         />
 
+                        <TouchableOpacity 
+                            style={styles.iconButton} 
+                            onPress={() => setHidePass(!hidePass)}
+                        >
+                            <Ionicons 
+                                name={hidePass ? "eye-off" : "eye"} 
+                                size={24} 
+                                color="#878787" 
+                            />
+                        </TouchableOpacity>
                     </View>
+
+                </View>
                     <BtnSec text="ENTRAR" onPress={handleLogin} />
                 </View>
             </View>
@@ -116,8 +134,8 @@ const styles = StyleSheet.create({
     },
     background: {
         position: 'absolute',
-        width: 1000,
-        height: 570,
+        width: width*5, // aumenta a largura pra garantir rotação (para telas maiores)
+        height: height,
         top: -100.27,
         left: -50.96,
         transform: [{ rotate: '30deg' }],
@@ -174,5 +192,19 @@ const styles = StyleSheet.create({
         padding: 10,
         marginTop: 5,
     },
+    passwordContainer: {
+        flexDirection: 'row',
+        alignItems: 'center', 
+        borderWidth: 1,
+        borderColor: '#878787',
+        borderRadius: 5,
+        marginTop: 5,
+        paddingHorizontal: 10,
+        
+    },
+    inputInside: {
+        flex: 1, 
+        height: '100%',
+        fontSize: 16,
+    },
 });
-
