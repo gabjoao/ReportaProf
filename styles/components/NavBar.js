@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    container:{
+    container: {
         position: 'absolute',
         height: 100,
         width: '100%',
@@ -15,8 +15,8 @@ export const styles = StyleSheet.create({
         height: '100%',
         paddingTop: 15,
     },
-    text :{
+    text: {
         color: 'white',
-        fontFamily: 'Lexend'
-    }
+        fontFamily: 'Lexend',
+    },
 });

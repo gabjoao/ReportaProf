@@ -5,14 +5,14 @@ export const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'rgba(0,0,0,0.5)',
         justifyContent: 'center',
-        padding: 20
+        padding: 20,
     },
     content: {
         backgroundColor: '#f9f9f9',
         borderRadius: 15,
         padding: 20,
         maxHeight: '80%',
-        gap: 10
+        gap: 10,
     },
     title: {
         fontSize: 18,
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#f3f8f2ff',
     },
     itemText: {
-        fontSize: 16
+        fontSize: 16,
     },
     confirmBtn: {
         marginTop: 15,
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     },
     confirmText: {
         color: 'white',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
     },
     closeBtn: {
         marginTop: 10,
@@ -76,10 +76,10 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f8f9fa'
+        backgroundColor: '#f8f9fa',
     },
     specialText: {
-        fontWeight: '600'
+        fontWeight: '600',
     },
     debugText: {
         fontSize: 12,

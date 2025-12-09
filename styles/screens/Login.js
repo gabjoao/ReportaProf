@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     },
     background: {
         position: 'absolute',
-        width: width*6, // aumenta a largura pra garantir rotação (para telas maiores)
+        width: width * 6, // aumenta a largura pra garantir rotação (para telas maiores)
         height: height,
         top: -100.27,
         left: -50.96,
@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
         backgroundColor: 'white',
         padding: 20,
         borderRadius: 10,
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 2,
@@ -74,16 +74,15 @@ export const styles = StyleSheet.create({
     },
     passwordContainer: {
         flexDirection: 'row',
-        alignItems: 'center', 
+        alignItems: 'center',
         borderWidth: 1,
         borderColor: '#878787',
         borderRadius: 5,
         marginTop: 5,
         paddingHorizontal: 10,
-        
     },
     inputInside: {
-        flex: 1, 
+        flex: 1,
         height: '100%',
         fontSize: 16,
     },

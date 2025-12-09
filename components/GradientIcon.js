@@ -2,12 +2,12 @@ import { View } from 'react-native';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 
-import { 
-    FontAwesome, 
-    Ionicons, 
-    MaterialCommunityIcons, 
+import {
+    FontAwesome,
+    Ionicons,
+    MaterialCommunityIcons,
     AntDesign,
-    MaterialIcons
+    MaterialIcons,
 } from '@expo/vector-icons';
 
 const IconFamilies = {
@@ -18,42 +18,41 @@ const IconFamilies = {
     MaterialIcons: MaterialIcons,
 };
 
-export default({ 
+export default ({
     family = 'MaterialCommunityIcons',
-    name, 
-    size, 
-    colors, 
-    style 
-})  =>{
-  
-        const IconComponent = IconFamilies[family];
+    name,
+    size,
+    colors,
+    style,
+}) => {
+    const IconComponent = IconFamilies[family];
 
-        if (!IconComponent) {
-            console.log(`Família de ícone "${family}" não encontrada.`);
-            return null;
-        }
+    if (!IconComponent) {
+        console.log(`Família de ícone "${family}" não encontrada.`);
+        return null;
+    }
 
-        const containerSize = size + 4;
+    const containerSize = size + 4;
 
-        return (
-            <MaskedView
-            style={{ 
-                width: containerSize, 
+    return (
+        <MaskedView
+            style={{
+                width: containerSize,
                 height: containerSize,
-                ...style 
+                ...style,
             }}
             maskElement={
-                <View style={{ backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' }}>
-                
-                <IconComponent 
-                    name={name} 
-                    size={size} 
-                    color="black" 
-                />
+                <View
+                    style={{
+                        backgroundColor: 'transparent',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                    }}
+                >
+                    <IconComponent name={name} size={size} color="black" />
                 </View>
             }
-
-            >
+        >
             <LinearGradient
                 colors={colors}
                 start={{ x: 0, y: 0 }}
@@ -61,5 +60,5 @@ export default({
                 style={{ flex: 1 }}
             />
         </MaskedView>
-        ) ;
-}   
+    );
+};

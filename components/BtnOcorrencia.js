@@ -1,28 +1,39 @@
-import { Text, View } from "react-native";
-import { TouchableOpacity } from "react-native";
+import { Text, View } from 'react-native';
+import { TouchableOpacity } from 'react-native';
 import Entypo from '@expo/vector-icons/Entypo';
-import GradientIcon from "./GradientIcon";
-import { useState } from "react";
-import SelectionModal from "./SelectionModal";
-import { styles } from '../styles/components/BtnOcorrencia'
+import GradientIcon from './GradientIcon';
+import { useState } from 'react';
+import SelectionModal from './SelectionModal';
+import { styles } from '../styles/components/BtnOcorrencia';
 
 const ICON_CONFIG = {
     turma: {
-        family: "FontAwesome",
-        name: "graduation-cap"
+        family: 'FontAwesome',
+        name: 'graduation-cap',
     },
     estudante: {
-        family: "Ionicons",
-        name: "person"
+        family: 'Ionicons',
+        name: 'person',
     },
     situacao: {
-        family: "MaterialCommunityIcons",
-        name: "alert-octagon-outline"
-    }
+        family: 'MaterialCommunityIcons',
+        name: 'alert-octagon-outline',
+    },
 };
 
-export default ({ tipo, label, options, onSelect, selectedValue, multiple, disable, extraOptions, onSelectExtra, selectedExtraValue, extraTitle }) => {
-
+export default ({
+    tipo,
+    label,
+    options,
+    onSelect,
+    selectedValue,
+    multiple,
+    disable,
+    extraOptions,
+    onSelectExtra,
+    selectedExtraValue,
+    extraTitle,
+}) => {
     const [modalVisible, setModalVisible] = useState(false);
     const iconData = ICON_CONFIG[tipo];
 
@@ -32,7 +43,7 @@ export default ({ tipo, label, options, onSelect, selectedValue, multiple, disab
     }
 
     const formatItem = (item) => {
-        if (!item) return "";
+        if (!item) return '';
 
         // 1. Caso Especial: TURMA (Objeto Complexo da API)
         if (item.turma && item.disciplina) {
@@ -42,7 +53,7 @@ export default ({ tipo, label, options, onSelect, selectedValue, multiple, disab
         // 2. Casos Padrões (Estudante, Situação, etc)
         if (item.nome) return item.nome;
         if (item.name) return item.name;
-        
+
         // 3. Último recurso (evita o [object Object])
         return String(item);
     };
@@ -54,7 +65,7 @@ export default ({ tipo, label, options, onSelect, selectedValue, multiple, disab
         // SE FOR ARRAY (Múltipla escolha)
         if (Array.isArray(selectedValue)) {
             if (selectedValue.length === 0) return label;
-            
+
             // Se tiver mais de 1, mostra a contagem
             if (selectedValue.length > 1) {
                 return `${selectedValue.length} selecionados`;
@@ -70,21 +81,30 @@ export default ({ tipo, label, options, onSelect, selectedValue, multiple, disab
 
     return (
         <>
-            <TouchableOpacity style={[styles.input, disable && { opacity: 0.5, backgroundColor: '#f0f0f0' }]}
+            <TouchableOpacity
+                style={[
+                    styles.input,
+                    disable && { opacity: 0.5, backgroundColor: '#f0f0f0' },
+                ]}
                 onPress={() => {
                     if (!disable) setModalVisible(true);
-                }
-                }
-                activeOpacity={disable ? 1 : 0.7} >
-
-                <View style={styles.itens} >
-                    <GradientIcon family={iconData.family} name={iconData.name} size={20} colors={['#010201', '#5ee24f']} />
-                    <Text style={styles.label} numberOfLines={1} >{getDisplayText()}</Text>
+                }}
+                activeOpacity={disable ? 1 : 0.7}
+            >
+                <View style={styles.itens}>
+                    <GradientIcon
+                        family={iconData.family}
+                        name={iconData.name}
+                        size={20}
+                        colors={['#010201', '#5ee24f']}
+                    />
+                    <Text style={styles.label} numberOfLines={1}>
+                        {getDisplayText()}
+                    </Text>
                 </View>
 
                 <Entypo name="magnifying-glass" size={20} color="#4a4a4a" />
             </TouchableOpacity>
-
 
             <SelectionModal
                 visible={modalVisible}
@@ -95,7 +115,6 @@ export default ({ tipo, label, options, onSelect, selectedValue, multiple, disab
                 selectedValue={selectedValue} // valor cru, o Modal trata array/single
                 selectedValues={selectedValue} // mantendo compatibilidade
                 multiple={multiple}
-
                 // lógica da sala especial
                 extraOptions={extraOptions}
                 extraTitle={extraTitle}
@@ -104,4 +123,4 @@ export default ({ tipo, label, options, onSelect, selectedValue, multiple, disab
             />
         </>
     );
-}
+};

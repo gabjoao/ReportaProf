@@ -1,19 +1,17 @@
-import { Text, View, TextInput } from "react-native";
-import Header from "../components/Header";
-import GradientText from "../components/GradientText";
-import NavBar from "../components/NavBar";
-import BtnOcorrencia from "../components/BtnOcorrencia";
-import { useState, useEffect } from "react";
-import BtnSec from "../components/BtnSec";
-import BtnPrim from "../components/BtnPrim";
-import * as api from '../utils/api'
+import { Text, View, TextInput } from 'react-native';
+import Header from '../components/Header';
+import GradientText from '../components/GradientText';
+import NavBar from '../components/NavBar';
+import BtnOcorrencia from '../components/BtnOcorrencia';
+import { useState, useEffect } from 'react';
+import BtnSec from '../components/BtnSec';
+import BtnPrim from '../components/BtnPrim';
+import * as api from '../utils/api';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from '../styles/screens/Home'
+import { styles } from '../styles/screens/Home';
 const OcorrenciaClasse = require('../models/Ocorrencia');
 
-
 export default () => {
-
     const navigation = useNavigation();
 
     const [turma, setTurma] = useState(null);
@@ -27,19 +25,21 @@ export default () => {
     const [estudantes, setEstudantes] = useState([]);
     const [situacoes, setSituacoes] = useState([]);
 
-    const registrarOcorrencia = async (ocorrencia) =>{
+    const registrarOcorrencia = async (ocorrencia) => {
         console.log(ocorrencia);
         try {
             const res = await api.createOcorrencia(ocorrencia);
 
-            if(res.ok) navigation.navigate('NovaOcorrencia');
-            else alert('Erro ao registrar ocorrência' + (JSON.stringify(res.body) || ''));
-            
+            if (res.ok) navigation.navigate('NovaOcorrencia');
+            else
+                alert(
+                    'Erro ao registrar ocorrência' +
+                        (JSON.stringify(res.body) || ''),
+                );
         } catch (error) {
             console.log(error);
         }
-
-    }
+    };
     const load = async () => {
         try {
             const resTurmas = await api.getTurmas();
@@ -50,23 +50,29 @@ export default () => {
 
             const resSituacoes = await api.getSituacoes();
             setSituacoes(resSituacoes.body || resSituacoes || []);
-
         } catch (error) {
             console.error('Erro ao carregar dados:', error);
         }
-    }
-
-
+    };
 
     const carregarEstudantes = async (turmaSelecionada) => {
         if (turmaSelecionada && turmaSelecionada.id) {
             try {
-                console.log('Buscando estudantes para turma:', turmaSelecionada.id);
-                const resEstudantes = await api.getEstudantes(turmaSelecionada.id);
+                console.log(
+                    'Buscando estudantes para turma:',
+                    turmaSelecionada.id,
+                );
+                const resEstudantes = await api.getEstudantes(
+                    turmaSelecionada.id,
+                );
                 console.log('Resposta da API estudantes:', resEstudantes);
 
                 // Verifica se a resposta é válida
-                if (resEstudantes && resEstudantes.body !== null && resEstudantes.body !== undefined) {
+                if (
+                    resEstudantes &&
+                    resEstudantes.body !== null &&
+                    resEstudantes.body !== undefined
+                ) {
                     setEstudantes(resEstudantes.body || []);
                 } else if (Array.isArray(resEstudantes)) {
                     setEstudantes(resEstudantes);
@@ -82,7 +88,7 @@ export default () => {
             setEstudantes([]);
             setEstudante([]);
         }
-    }
+    };
 
     useEffect(() => {
         if (turma) {
@@ -91,7 +97,6 @@ export default () => {
             setEstudantes([]);
             setEstudante([]);
         }
-
     }, [turma]);
 
     useEffect(() => {
@@ -105,21 +110,20 @@ export default () => {
     const formCompleto = turma && estudante.length > 0 && situacao.length > 0;
 
     return (
-        <View style={{ height: '100%' }} >
+        <View style={{ height: '100%' }}>
             <Header />
 
             <View style={styles.screen}>
-                <View style={styles.texts} >
+                <View style={styles.texts}>
                     <GradientText
                         text="Olá, professor,"
                         style={[{ fontWeight: 800 }, styles.h1]}
                     />
-                    <Text style={styles.h1} >registre aqui sua ocorrência.</Text>
+                    <Text style={styles.h1}>registre aqui sua ocorrência.</Text>
                 </View>
 
-                <View style={styles.container} >
-
-                    <View style={styles.inputsContainer} >
+                <View style={styles.container}>
+                    <View style={styles.inputsContainer}>
                         {/* TURMA */}
                         <BtnOcorrencia
                             tipo={'turma'}
@@ -127,7 +131,10 @@ export default () => {
                             options={turmas}
                             selectedValue={turma}
                             onSelect={(novaTurma) => {
-                                console.log("Turma selecionada no onSelect:", novaTurma);
+                                console.log(
+                                    'Turma selecionada no onSelect:',
+                                    novaTurma,
+                                );
                                 setTurma(novaTurma);
                                 setSala(null);
                             }}
@@ -135,7 +142,7 @@ export default () => {
                             extraTitle="Sala especial?"
                             selectedExtraValue={sala}
                             onSelectExtra={(novaSala) => {
-                                console.log("Sala selecionada:", novaSala);
+                                console.log('Sala selecionada:', novaSala);
                                 setSala(novaSala);
                             }}
                         />
@@ -174,31 +181,47 @@ export default () => {
 
                 {formCompleto && (
                     <View>
-                        <BtnPrim text="ENVIAR OCORRÊNCIA" onPress={() => { 
-                            const estudantesId = estudante.map(estudante => estudante.id);
-                            const situacoesId = situacao.map(situacao => situacao.id)
-                            let salaEnviar;
-                            
-                            if(sala == null) salaEnviar = null;
-                            else salaEnviar = sala.id;
-                            
-                            console.log(salaEnviar);
-                            const minhaOcorrencia = new OcorrenciaClasse(observacao, turmas[0].professor.id, turma.turma.id, estudantesId, situacoesId, salaEnviar);
-                            registrarOcorrencia(minhaOcorrencia); 
-                        }} />
-                        <BtnSec text="CANCELAR" onPress={() => {
-                            setTurma(null);
-                            setSala(null);
-                            setEstudante([]);
-                            setSituacao([]);
-                            setObservacao('');
-                        }} />
+                        <BtnPrim
+                            text="ENVIAR OCORRÊNCIA"
+                            onPress={() => {
+                                const estudantesId = estudante.map(
+                                    (estudante) => estudante.id,
+                                );
+                                const situacoesId = situacao.map(
+                                    (situacao) => situacao.id,
+                                );
+                                let salaEnviar;
+
+                                if (sala == null) salaEnviar = null;
+                                else salaEnviar = sala.id;
+
+                                console.log(salaEnviar);
+                                const minhaOcorrencia = new OcorrenciaClasse(
+                                    observacao,
+                                    turmas[0].professor.id,
+                                    turma.turma.id,
+                                    estudantesId,
+                                    situacoesId,
+                                    salaEnviar,
+                                );
+                                registrarOcorrencia(minhaOcorrencia);
+                            }}
+                        />
+                        <BtnSec
+                            text="CANCELAR"
+                            onPress={() => {
+                                setTurma(null);
+                                setSala(null);
+                                setEstudante([]);
+                                setSituacao([]);
+                                setObservacao('');
+                            }}
+                        />
                     </View>
                 )}
-
             </View>
 
             <NavBar status="ocorrencia" />
         </View>
     );
-}
+};

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const styles = StyleSheet.create({
-    button:{
+    button: {
         width: 200,
         alignSelf: 'center',
         backgroundColor: '#c02623',
@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
         borderRadius: 5,
         marginTop: 20,
         alignItems: 'center',
-        shadowColor: "#000",
+        shadowColor: '#000',
         shadowOffset: {
             width: 0,
             height: 2,
@@ -18,10 +18,10 @@ export const styles = StyleSheet.create({
         shadowRadius: 3.84,
         elevation: 5,
     },
-    buttonText:{
+    buttonText: {
         color: 'white',
         fontFamily: 'Lexend',
         fontWeight: '700',
         fontSize: 16,
-    }
+    },
 });

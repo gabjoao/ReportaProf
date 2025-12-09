@@ -1,11 +1,29 @@
 import { useState, useEffect } from 'react';
-import { Modal, View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+    Modal,
+    View,
+    Text,
+    FlatList,
+    TouchableOpacity,
+    StyleSheet,
+} from 'react-native';
 import GradientIcon from './GradientIcon';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from '../styles/components/SelectionModal'
+import { styles } from '../styles/components/SelectionModal';
 
-export default ({ visible, onClose, title, options, onSelect, multiple, selectedValues, extraOptions, extraTitle, onSelectExtra, selectedExtraValue }) => {
-
+export default ({
+    visible,
+    onClose,
+    title,
+    options,
+    onSelect,
+    multiple,
+    selectedValues,
+    extraOptions,
+    extraTitle,
+    onSelectExtra,
+    selectedExtraValue,
+}) => {
     const [localSelected, setLocalSelected] = useState([]);
     const [isShowingExtra, setIsShowingExtra] = useState(false);
     const [localExtraSelected, setLocalExtraSelected] = useState(null);
@@ -14,11 +32,12 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
         if (visible) {
             setIsShowingExtra(false);
             const initial = selectedValues
-                ? (Array.isArray(selectedValues) ? selectedValues : [selectedValues])
+                ? Array.isArray(selectedValues)
+                    ? selectedValues
+                    : [selectedValues]
                 : [];
             setLocalSelected(initial);
             setLocalExtraSelected(selectedExtraValue);
-
         }
     }, [visible, selectedValues, selectedExtraValue, options]);
 
@@ -28,21 +47,25 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
         } else {
             onClose();
         }
-    }
+    };
 
     const handlePress = (item) => {
         if (isShowingExtra) {
             setLocalExtraSelected(item);
         } else {
             if (multiple) {
-                const isAlreadySelected = localSelected.some(selected =>
-                    selected === item || selected?.id === item?.id
+                const isAlreadySelected = localSelected.some(
+                    (selected) =>
+                        selected === item || selected?.id === item?.id,
                 );
 
                 if (isAlreadySelected) {
-                    setLocalSelected(localSelected.filter(selected =>
-                        selected !== item && selected?.id !== item?.id
-                    ));
+                    setLocalSelected(
+                        localSelected.filter(
+                            (selected) =>
+                                selected !== item && selected?.id !== item?.id,
+                        ),
+                    );
                 } else {
                     setLocalSelected([...localSelected, item]);
                 }
@@ -69,10 +92,10 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
         }
 
         onClose();
-    }
+    };
 
     const currentList = isShowingExtra ? extraOptions : options;
-    const currentTitleDisplay = isShowingExtra ? "Selecione a Sala" : title;
+    const currentTitleDisplay = isShowingExtra ? 'Selecione a Sala' : title;
 
     // função para obter key única
     const getKey = (item, index) => {
@@ -89,7 +112,7 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
         // no caso qie seja apenas uma string (ex: lista de salas simples)
         if (typeof item === 'string') return item;
 
-        // verifica se é o objeto complexo de Turma + Disciplina 
+        // verifica se é o objeto complexo de Turma + Disciplina
         if (item.turma && item.disciplina) {
             // retorna: "sala - discplina"
             return `${item.turma.nome} - ${item.disciplina.nome}`;
@@ -98,18 +121,22 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
         // fallbacks para outros tipos de lista (Estudantes, Situações)
         if (item.nome) return item.nome;
         if (item.name) return item.name;
-        
+
         // fallback final para segurança
         return 'Item sem nome';
     };
-    
+
     const isItemSelected = (item) => {
         if (isShowingExtra) {
-            return localExtraSelected === item || localExtraSelected?.id === item?.id;
+            return (
+                localExtraSelected === item ||
+                localExtraSelected?.id === item?.id
+            );
         } else {
             if (multiple) {
-                return localSelected.some(selected =>
-                    selected === item || selected?.id === item?.id
+                return localSelected.some(
+                    (selected) =>
+                        selected === item || selected?.id === item?.id,
                 );
             } else {
                 const selected = localSelected[0];
@@ -127,16 +154,18 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
         >
             <View style={styles.overlay}>
                 <View style={styles.content}>
-
-                    <TouchableOpacity style={styles.closeBtn} onPress={handleTopButton}>
+                    <TouchableOpacity
+                        style={styles.closeBtn}
+                        onPress={handleTopButton}
+                    >
                         <GradientIcon
-                            name='arrow-back'
-                            family='MaterialIcons'
+                            name="arrow-back"
+                            family="MaterialIcons"
                             size={20}
                             colors={['#cb2625', '#af1919ff']}
                         />
                         <Text style={styles.closeText}>
-                            {isShowingExtra ? "Voltar para Turmas" : "Cancelar"}
+                            {isShowingExtra ? 'Voltar para Turmas' : 'Cancelar'}
                         </Text>
                     </TouchableOpacity>
 
@@ -151,40 +180,64 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
 
                             return (
                                 <TouchableOpacity
-                                    style={[styles.item, isSelected && styles.itemSelected]}
+                                    style={[
+                                        styles.item,
+                                        isSelected && styles.itemSelected,
+                                    ]}
                                     onPress={() => handlePress(item)}
                                 >
-                                    <Text style={[styles.itemText, isSelected && { fontWeight: 'bold' }]}>
+                                    <Text
+                                        style={[
+                                            styles.itemText,
+                                            isSelected && {
+                                                fontWeight: 'bold',
+                                            },
+                                        ]}
+                                    >
                                         {itemText}
                                     </Text>
 
-                                    {isSelected && <GradientIcon
-                                        family="AntDesign"
-                                        name="check-circle"
-                                        size={20}
-                                        colors={['#010201', '#5ee24f']}
-                                    />}
+                                    {isSelected && (
+                                        <GradientIcon
+                                            family="AntDesign"
+                                            name="check-circle"
+                                            size={20}
+                                            colors={['#010201', '#5ee24f']}
+                                        />
+                                    )}
                                 </TouchableOpacity>
-                            )
+                            );
                         }}
                     />
 
-                    {!isShowingExtra && extraOptions && localSelected.length > 0 && (
-                        <TouchableOpacity
-                            style={styles.specialBtn}
-                            onPress={() => setIsShowingExtra(true)}
-                        >
-                            <GradientIcon family="Ionicons" name="create-outline" size={20} colors={['#000000ff', '#0f2005ff']} />
-                            <Text style={styles.specialText}>
-                                {localExtraSelected
-                                    ? `Sala: ${getItemText(localExtraSelected)}`
-                                    : extraTitle}
-                            </Text>
-                        </TouchableOpacity>
-                    )}
+                    {!isShowingExtra &&
+                        extraOptions &&
+                        localSelected.length > 0 && (
+                            <TouchableOpacity
+                                style={styles.specialBtn}
+                                onPress={() => setIsShowingExtra(true)}
+                            >
+                                <GradientIcon
+                                    family="Ionicons"
+                                    name="create-outline"
+                                    size={20}
+                                    colors={['#000000ff', '#0f2005ff']}
+                                />
+                                <Text style={styles.specialText}>
+                                    {localExtraSelected
+                                        ? `Sala: ${getItemText(
+                                              localExtraSelected,
+                                          )}`
+                                        : extraTitle}
+                                </Text>
+                            </TouchableOpacity>
+                        )}
 
                     {(multiple || extraOptions) && (
-                        <TouchableOpacity style={styles.confirmBtn} onPress={confirmSelection}>
+                        <TouchableOpacity
+                            style={styles.confirmBtn}
+                            onPress={confirmSelection}
+                        >
                             <LinearGradient
                                 colors={['#55cc47', '#3d9233']}
                                 style={StyleSheet.absoluteFill}
@@ -198,4 +251,4 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
             </View>
         </Modal>
     );
-}
+};

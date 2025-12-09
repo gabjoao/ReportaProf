@@ -25,5 +25,5 @@ export const styles = StyleSheet.create({
         fontSize: 14,
         color: 'black',
         fontWeight: '700',
-    }
+    },
 });
