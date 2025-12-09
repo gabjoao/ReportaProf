@@ -1,5 +1,16 @@
 # ReportaProf
 
+## Tecnologias
+
+Foi utilizado no projeto [React Native](https://reactnative.dev/) com [Expo](https://expo.dev/) para a implementação. A escolha do React Native se dá pela portabilidade mais fácil para uma versão Web com React, que, porém, não entra no escopo desse repositório.
+
+[Breve vídeo da implementação](https://www.youtube.com/shorts/ZdhcuVoxjx0)
+
+## Dependências 
+É necessário ter o [Node](https://nodejs.org/pt) instalado no computador e rodar o comando *npm i* na raíz do projeto, que baixará todas as dependências necessárias.
+Para rodar com o [Expo](https://expo.dev/) basta rodar *npm run start* na raíz do projeto, depois escolher a forma que deseja abrir.
+
+
 O ReportaProf é um projeto realizado nas disciplinas de Análise e Modelagem de Sistemas, WEB II e Mobile para o 4º período do curso de ADS.
 O projeto foi realizado em colaboração com o [Bruno Candido](https://github.com/Bruno-Candido-de-Oliveira), que realizou o [backend do projeto](https://github.com/Bruno-Candido-de-Oliveira/ReportaProf).
 
@@ -31,9 +42,3 @@ O fluxo principal é:
 Todos os dados são requisitados da API.
 Após selecionar uma turma, o sistema puxa os alunos que estão cadastrados nessa turma.
 Toda turma já está vinculada a uma sala, porém é possível que naquele momento a turma esteja em uma dependência diferente, como laboratório ou quadra. Ao selecionar a turma existe uma opção de selecionar uma dependência diferente.
-
-## Tecnologias
-
-Foi utilizado no projeto React Native com Expo para a implementação. A escolha do React Native se dá pela portabilidade mais fácil para uma versão Web com React, que, porém, não entra no escopo desse repositório.
-
-[Breve vídeo da implementação](https://www.youtube.com/shorts/ZdhcuVoxjx0)
