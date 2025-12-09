@@ -1,9 +1,9 @@
 import { View, Text, Pressable } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet } from "react-native";
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from "@react-navigation/native";
+import { styles } from '../styles/components/NavBar'
 
 export default ({status}) =>{
 
@@ -60,24 +60,3 @@ export default ({status}) =>{
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    container:{
-        position: 'absolute',
-        height: 100,
-        width: '100%',
-        bottom: 0,
-    },
-    content: {
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        height: '100%',
-        paddingTop: 15,
-    },
-    text :{
-        color: 'white',
-        fontFamily: 'Lexend'
-    }
-});

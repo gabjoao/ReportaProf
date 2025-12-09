@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from '../styles/components/BtnSec'
+import { styles } from '../styles/components/BtnPrim'
 
 export default ({text, onPress}) => {
 
@@ -9,10 +9,10 @@ export default ({text, onPress}) => {
             onPress={onPress} 
         >
             <LinearGradient 
-                colors={['rgba(219, 39, 39, 1)', 'rgba(169, 37, 32, 1)']}  
+                colors={['#55cc47', '#3d9233']}
                 style={StyleSheet.absoluteFill} 
                 start={{ x: 0, y: 0 }}
-                end={{ x: 0, y: 1 }}      
+                end={{ x: 0, y: 1 }}
             />
             <Text style={styles.buttonText}>{text}</Text>
         </TouchableOpacity>

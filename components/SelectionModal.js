@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Modal, View, Text, FlatList, TouchableOpacity, StyleSheet } from 'react-native';
-import GradnentIcon from './GradnentIcon';
+import GradientIcon from './GradientIcon';
 import { LinearGradient } from 'expo-linear-gradient';
+import { styles } from '../styles/components/SelectionModal'
 
 export default ({ visible, onClose, title, options, onSelect, multiple, selectedValues, extraOptions, extraTitle, onSelectExtra, selectedExtraValue }) => {
 
@@ -128,7 +129,7 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
                 <View style={styles.content}>
 
                     <TouchableOpacity style={styles.closeBtn} onPress={handleTopButton}>
-                        <GradnentIcon
+                        <GradientIcon
                             name='arrow-back'
                             family='MaterialIcons'
                             size={20}
@@ -157,7 +158,7 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
                                         {itemText}
                                     </Text>
 
-                                    {isSelected && <GradnentIcon
+                                    {isSelected && <GradientIcon
                                         family="AntDesign"
                                         name="check-circle"
                                         size={20}
@@ -173,7 +174,7 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
                             style={styles.specialBtn}
                             onPress={() => setIsShowingExtra(true)}
                         >
-                            <GradnentIcon family="Ionicons" name="create-outline" size={20} colors={['#000000ff', '#0f2005ff']} />
+                            <GradientIcon family="Ionicons" name="create-outline" size={20} colors={['#000000ff', '#0f2005ff']} />
                             <Text style={styles.specialText}>
                                 {localExtraSelected
                                     ? `Sala: ${getItemText(localExtraSelected)}`
@@ -198,92 +199,3 @@ export default ({ visible, onClose, title, options, onSelect, multiple, selected
         </Modal>
     );
 }
-
-const styles = StyleSheet.create({
-    overlay: {
-        flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.5)',
-        justifyContent: 'center',
-        padding: 20
-    },
-    content: {
-        backgroundColor: '#f9f9f9',
-        borderRadius: 15,
-        padding: 20,
-        maxHeight: '80%',
-        gap: 10
-    },
-    title: {
-        fontSize: 18,
-        fontWeight: 'bold',
-        marginBottom: 15,
-        textAlign: 'center',
-        marginTop: 40,
-    },
-    item: {
-        padding: 12,
-        borderWidth: 1,
-        borderColor: '#878787',
-        marginTop: 10,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        borderRadius: 5,
-    },
-    itemSelected: {
-        borderWidth: 1,
-        borderColor: '#309130ff',
-        backgroundColor: '#f3f8f2ff',
-    },
-    itemText: {
-        fontSize: 16
-    },
-    confirmBtn: {
-        marginTop: 15,
-        padding: 8,
-        borderRadius: 8,
-        alignItems: 'center',
-        backgroundColor: '#c02623',
-        height: 50,
-        justifyContent: 'center',
-    },
-    confirmText: {
-        color: 'white',
-        fontWeight: 'bold'
-    },
-    closeBtn: {
-        marginTop: 10,
-        alignItems: 'center',
-        padding: 10,
-        position: 'absolute',
-        marginLeft: 10,
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-        flexDirection: 'row',
-        gap: 10,
-    },
-    closeText: {
-        color: '#af1919ff',
-        fontSize: 14,
-        fontWeight: 'bold',
-    },
-    specialBtn: {
-        marginTop: 5,
-        marginBottom: 5,
-        padding: 8,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: '#f8f9fa'
-    },
-    specialText: {
-        fontWeight: '600'
-    },
-    debugText: {
-        fontSize: 12,
-        color: '#666',
-        textAlign: 'center',
-        fontStyle: 'italic',
-    },
-});

@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { StyleSheet } from "react-native";
+import { styles } from '../styles/components/Header'
 
 export default function Header() {
   const insets = useSafeAreaInsets();
@@ -19,17 +19,3 @@ export default function Header() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  content: {
-    height: 70, 
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontFamily: 'Nunito',
-    color: 'white',
-    fontWeight: '500',
-    fontSize: 18,
-  }
-});

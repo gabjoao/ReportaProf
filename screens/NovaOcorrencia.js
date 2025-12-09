@@ -1,10 +1,11 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text } from "react-native";
 import Header from "../components/Header";
 import NavBar from "../components/NavBar";
-import GradnentIcon from '../components/GradnentIcon';
+import GradientIcon from '../components/GradientIcon';
 import GradientText from "../components/GradientText";
-import BtnNovaOcorrencia from "../components/btnNovaOcorrencia";
+import BtnNovaOcorrencia from "../components/BtnNovaOcorrencia";
 import { useNavigation } from '@react-navigation/native';
+import { styles } from '../styles/screens/NovaOcorrencia'
 
 export default () => {
 
@@ -15,7 +16,7 @@ export default () => {
             <Header />
             <View style={styles.container} >
     
-            <GradnentIcon
+            <GradientIcon
                     name='check-circle'
                     family='AntDesign'
                     size={160}
@@ -37,7 +38,6 @@ export default () => {
                     <BtnNovaOcorrencia text='VOLTAR AO INÍCIO' onPress={() => navigation.navigate('Home')} />
                 </View>
                 
-
             </View>
             <NavBar />
         </View>
@@ -46,23 +46,3 @@ export default () => {
 
 }
 
-const styles = StyleSheet.create({
-    container:{
-        alignItems: 'center',
-        marginTop: 80,
-        gap: 20,
-    },
-
-    h1: {
-        fontSize: 24,
-        fontFamily: 'Lexend',
-        textAlign: 'center',
-        height: 30,
-    },
-    h2: {
-        fontSize: 20,
-        fontFamily: 'Lexend',
-        textAlign: 'center',
-        
-    },
-});
