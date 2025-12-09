@@ -1,15 +1,15 @@
 import { Text, View, TextInput } from 'react-native';
-import Header from '../components/Header';
-import GradientText from '../components/GradientText';
-import NavBar from '../components/NavBar';
-import BtnOcorrencia from '../components/BtnOcorrencia';
+import Header from '@components/Header';
+import GradientText from '@components/GradientText';
+import NavBar from '@components/NavBar';
+import BtnOcorrencia from '@components/BtnOcorrencia';
 import { useState, useEffect } from 'react';
-import BtnSec from '../components/BtnSec';
-import BtnPrim from '../components/BtnPrim';
-import * as api from '../utils/api';
+import BtnSec from '@components/BtnSec';
+import BtnPrim from '@components/BtnPrim';
+import * as api from '@utils/api';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from '../styles/screens/Home';
-const OcorrenciaClasse = require('../models/Ocorrencia');
+import { styles } from '@styles-screens/Home';
+const OcorrenciaClasse = require('@models/Ocorrencia');
 
 const Home = () => {
     const navigation = useNavigation();

@@ -1,11 +1,11 @@
 import { View, Text } from 'react-native';
-import Header from '../components/Header';
-import NavBar from '../components/NavBar';
-import GradientIcon from '../components/GradientIcon';
-import GradientText from '../components/GradientText';
-import BtnNovaOcorrencia from '../components/BtnNovaOcorrencia';
+import Header from '@components/Header';
+import NavBar from '@components/NavBar';
+import GradientIcon from '@components/GradientIcon';
+import GradientText from '@components/GradientText';
+import BtnNovaOcorrencia from '@components/BtnNovaOcorrencia';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from '../styles/screens/NovaOcorrencia';
+import { styles } from '@styles-screens/NovaOcorrencia';
 
 const NovaOcorrencia = () => {
     const navigation = useNavigation();

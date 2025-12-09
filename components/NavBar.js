@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
-import { styles } from '../styles/components/NavBar';
+import { styles } from '@styles-components/NavBar';
 
 const NavBar = ({ status }) => {
     const navigation = useNavigation();

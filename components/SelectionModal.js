@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import GradientIcon from './GradientIcon';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from '../styles/components/SelectionModal';
+import { styles } from '@styles-components/SelectionModal';
 
 const SelectionModal = ({
     visible,

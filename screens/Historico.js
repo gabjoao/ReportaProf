@@ -1,11 +1,11 @@
-import Header from '../components/Header';
-import NavBar from '../components/NavBar';
+import Header from '@components/Header';
+import NavBar from '@components/NavBar';
 import { View, Text, FlatList, TouchableOpacity } from 'react-native';
 import { useEffect, useState } from 'react';
-import * as api from '../utils/api';
+import * as api from '@utils/api';
 import { format } from 'date-fns';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
-import { styles } from '../styles/screens/Historico';
+import { styles } from '@styles-screens/Historico';
 
 const Historico = () => {
     const [ocorrencias, setOcorrencias] = useState(null);

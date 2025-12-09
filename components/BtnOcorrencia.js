@@ -4,7 +4,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import GradientIcon from './GradientIcon';
 import { useState } from 'react';
 import SelectionModal from './SelectionModal';
-import { styles } from '../styles/components/BtnOcorrencia';
+import { styles } from '@styles-components/BtnOcorrencia';
 
 const ICON_CONFIG = {
     turma: {

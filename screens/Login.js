@@ -4,11 +4,11 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useState } from 'react';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { Ionicons } from '@expo/vector-icons';
-import BtnSec from '../components/BtnSec';
+import BtnSec from '@components/BtnSec';
 import { useNavigation } from '@react-navigation/native';
-import * as api from '../utils/api';
+import * as api from '@utils/api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { styles } from '../styles/screens/Login';
+import { styles } from '@styles-screens/Login';
 
 let KEY;
 

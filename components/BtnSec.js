@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from '../styles/components/BtnSec';
+import { styles } from '@styles-components/BtnSec';
 
 const Btnsec =  ({ text, onPress }) => {
     return (

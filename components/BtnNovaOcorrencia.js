@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from '../styles/components/BtnNovaOcorrencia';
+import { styles } from '@styles-components/BtnNovaOcorrencia';
 
 const BtnNovaOcorrencia = ({ text, onPress }) => {
     return (

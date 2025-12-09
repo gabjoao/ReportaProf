@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from '../styles/components/BtnPrim';
+import { styles } from '@styles-components/BtnPrim';
 
 const BtnPrim = ({ text, onPress }) => {
     return (

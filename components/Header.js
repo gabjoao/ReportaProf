@@ -1,7 +1,7 @@
 import { View, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { styles } from '../styles/components/Header';
+import { styles } from '@styles-components/Header';
 
 const Header = () => {
     const insets = useSafeAreaInsets();
