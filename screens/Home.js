@@ -11,7 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/screens/Home';
 const OcorrenciaClasse = require('../models/Ocorrencia');
 
-export default () => {
+const Home = () => {
     const navigation = useNavigation();
 
     const [turma, setTurma] = useState(null);
@@ -225,3 +225,5 @@ export default () => {
         </View>
     );
 };
+
+export default Home;

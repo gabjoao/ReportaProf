@@ -5,7 +5,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/components/NavBar';
 
-export default ({ status }) => {
+const NavBar = ({ status }) => {
     const navigation = useNavigation();
     const insets = useSafeAreaInsets();
 
@@ -89,3 +89,5 @@ export default ({ status }) => {
         </View>
     );
 };
+
+export default NavBar;

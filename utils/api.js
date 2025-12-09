@@ -1,7 +1,7 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const BASE_URL = 'http://10.0.2.2:8000/';
 //const BASE_URL = "http://127.0.0.1:8000/"; // <--- troque para seu IP local ou 10.0.2.2 em emulador Android
 //https://marti-dittographic-undistractingly.ngrok-free.dev/
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const retrieveData = async (key) => {
     try {
@@ -48,6 +48,7 @@ async function fetchJson(url, options = {}) {
             body: text ? JSON.parse(text) : null,
         };
     } catch (err) {
+        console.error('Erro ao parsear JSON:', err);
         return { ok: res.ok, status: res.status, body: text };
     }
 }

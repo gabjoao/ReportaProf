@@ -7,7 +7,7 @@ import { format } from 'date-fns';
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import { styles } from '../styles/screens/Historico';
 
-export default () => {
+const Historico = () => {
     const [ocorrencias, setOcorrencias] = useState(null);
 
     const load = async () => {
@@ -119,3 +119,5 @@ export default () => {
         </View>
     );
 };
+
+export default Historico;

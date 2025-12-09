@@ -7,7 +7,7 @@ import BtnNovaOcorrencia from '../components/BtnNovaOcorrencia';
 import { useNavigation } from '@react-navigation/native';
 import { styles } from '../styles/screens/NovaOcorrencia';
 
-export default () => {
+const NovaOcorrencia = () => {
     const navigation = useNavigation();
 
     return (
@@ -47,3 +47,5 @@ export default () => {
         </View>
     );
 };
+
+export default NovaOcorrencia;

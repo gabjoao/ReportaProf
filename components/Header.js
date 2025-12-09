@@ -3,7 +3,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { styles } from '../styles/components/Header';
 
-export default function Header() {
+const Header = () => {
     const insets = useSafeAreaInsets();
 
     return (
@@ -25,3 +25,5 @@ export default function Header() {
         </View>
     );
 }
+
+export default Header;

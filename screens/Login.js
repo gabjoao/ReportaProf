@@ -12,7 +12,7 @@ import { styles } from '../styles/screens/Login';
 
 let KEY;
 
-export default () => {
+const Login = () => {
     const navigation = useNavigation();
 
     const [user, setUser] = useState('');
@@ -109,3 +109,5 @@ export default () => {
         </SafeAreaView>
     );
 };
+
+export default Login;

@@ -21,7 +21,7 @@ const ICON_CONFIG = {
     },
 };
 
-export default ({
+const BtnOcorrencia = ({
     tipo,
     label,
     options,
@@ -124,3 +124,5 @@ export default ({
         </>
     );
 };
+
+export default BtnOcorrencia;

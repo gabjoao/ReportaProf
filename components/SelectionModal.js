@@ -11,7 +11,7 @@ import GradientIcon from './GradientIcon';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '../styles/components/SelectionModal';
 
-export default ({
+const SelectionModal = ({
     visible,
     onClose,
     title,
@@ -252,3 +252,5 @@ export default ({
         </Modal>
     );
 };
+
+export default SelectionModal;

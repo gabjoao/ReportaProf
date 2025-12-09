@@ -18,7 +18,7 @@ const IconFamilies = {
     MaterialIcons: MaterialIcons,
 };
 
-export default ({
+const GradientIcon = ({
     family = 'MaterialCommunityIcons',
     name,
     size,
@@ -62,3 +62,5 @@ export default ({
         </MaskedView>
     );
 };
+
+export default GradientIcon;

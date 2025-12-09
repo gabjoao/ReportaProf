@@ -2,7 +2,7 @@ import { Text } from 'react-native';
 import MaskedView from '@react-native-masked-view/masked-view';
 import { LinearGradient } from 'expo-linear-gradient';
 
-export default ({ text, style }) => {
+const GradientText = ({ text, style }) => {
     return (
         <MaskedView
             style={{ height: 30 }}
@@ -23,3 +23,5 @@ export default ({ text, style }) => {
         </MaskedView>
     );
 };
+
+export default GradientText;

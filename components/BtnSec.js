@@ -2,7 +2,7 @@ import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { styles } from '../styles/components/BtnSec';
 
-export default ({ text, onPress }) => {
+const Btnsec =  ({ text, onPress }) => {
     return (
         <TouchableOpacity style={styles.button} onPress={onPress}>
             <LinearGradient
@@ -15,3 +15,5 @@ export default ({ text, onPress }) => {
         </TouchableOpacity>
     );
 };
+
+export default Btnsec;
